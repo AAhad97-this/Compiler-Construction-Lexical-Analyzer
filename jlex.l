@@ -8,33 +8,33 @@ Alphabets [a-zA-Z]
 
 %%
 
-"+"|"-"|"*"|"/" printf("Arithmatic Operator: %s\n",yytext);
+"+"|"-"|"*"|"/" {return(ArithmaticOperator);}
 
-{Digit}+ printf("integer: %s\n",yytext);   
+{Digit}+ {return(INT);}   
 
-{Digit}+"."{Digit}* printf("Float: %s\n",yytext);  
+{Digit}+"."{Digit}* {return(FLOAT);}  
 
-"class"|"public"|"private"|"static"|"new"|"void"|"int"|"if"|"else"|"while"|"do"|"break"|"continue"|"double"|"float"|"return"|"for"|"main" printf("Keyword: %s\n",yytext);
+"class"|"public"|"private"|"static"|"new"|"void"|"int"|"if"|"else"|"while"|"do"|"break"|"continue"|"double"|"float"|"return"|"for"|"main" {return(keyword);}
 
-"true"|"false"  printf("bool: %s\n",yytext);
+"int"|"float"|"char"|"string" {return(type);}
 
-[a-zA-Z][a-zA-Z0-9"_"]* printf("an Identifier: %s\n",yytext);
+"true"|"false"  {return(boolean);}
 
-\".\" printf("an String: %s\n",yytext);
+[a-zA-Z][a-zA-Z0-9"_"]* {return(ID);}
 
-"<="|">="|"++"|"!="|"=="|"<"|">"|"--"|"&&"|"||" printf("RelationalOperator: %s\n",yytext);
+\".*\" {return(String);}
 
-"="  printf("AssignmentOperator: %s\n",yytext);
+"<="|">="|"++"|"!="|"=="|"<"|">"|"--"|"&&"|"||" {return(RelationalOperator);}
 
-"("|")"|"{"|"}"|"["|"]"|","|"."|"..."|"@" printf("Delimeter: %s\n",yytext);
+"="  {return(AssignmentOperator);}
 
-#|@|$|^|%|^|& printf("Special Characters: %s\n",yytext);
+#|@|$|^|%|^|& {return(SpecialCharacters);}
 
-";" printf("Semicol: %s\n",yytext);
+";" {return(semi);}
 
-"//"  printf("Single line comment %s\n",yytext);
+"//"  {return(SingleLineCommments);}
 
-.   printf("Unrecognized %s\n",yytext);
+.   {return(Unrecognized);}
 
 %%
 
